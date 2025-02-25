@@ -15,9 +15,9 @@ class App extends Component {
         dicomWeb: [
           {
             name: 'DCM4CHEE',
-            wadoUriRoot: 'http://192.168.1.118:3001/dcm4chee-arc/aets/DCM4CHEE/wado',
-            qidoRoot: 'http://192.168.1.118:3001/dcm4chee-arc/aets/DCM4CHEE/dimse/HOROS',
-            wadoRoot: 'http://192.168.1.118:3001/dcm4chee-arc/aets/DCM4CHEE/dimse/HOROS',
+            wadoUriRoot: 'http://192.168.1.108:3001/dcm4chee-arc/aets/DCM4CHEE/wado',
+            qidoRoot: 'http://192.168.1.108:3001/dcm4chee-arc/aets/DCM4CHEE/dimse/HOROS',
+            wadoRoot: 'http://192.168.1.108:3001/dcm4chee-arc/aets/DCM4CHEE/dimse/HOROS',
             qidoSupportsIncludeField: true,
             imageRendering: 'wadors',
             thumbnailRendering: 'wadors',
