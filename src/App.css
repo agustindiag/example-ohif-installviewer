@@ -26,3 +26,48 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.ohif-mobile-mode .ViewerMain {
+  flex-direction: column;
+}
+
+.ohif-mobile-mode .viewport-container {
+  width: 100vw;
+  height: 70vh; /* Mayor área para el visor */
+}
+
+.ohif-mobile-mode .toolbar-section {
+  height: 30vh;
+  overflow-y: auto;
+}
+
+/* Ajustar íconos y botones */
+.ohif-mobile-mode .ToolbarRow {
+  overflow-x: scroll;
+}
+
+.ohif-mobile-mode .viewport-container canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.ohif-mobile-mode .header-brand {
+  display: none;
+}
+
+.ohif-mobile-mode .header-menu {
+  display: none;
+}
+
+.ohif-mobile-mode .header-studyListLinkSection {
+  border-left: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 12px;
+  font-size: 16px;
+}
+
+.ohif-mobile-mode .notification-bar{
+  display: none;
+}

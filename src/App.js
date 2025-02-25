@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Viewer } from "@ohif/viewer";
 
 
 import { installViewer } from '@ohif/viewer';
-//import {OHIFExtDicomMicroscopy} from '@ohif/extension-dicom-microscopy'
 
 class App extends Component {
   constructor(props) {
@@ -12,23 +10,21 @@ class App extends Component {
     window.config = {
       routerBasename: '/',
       filterQueryParam: true,
-//      extensions: [OHIFExtDicomMicroscopy],
+      showStudyList: true, // Asegura que la lista de estudios sea visible
       servers: {
         dicomWeb: [
           {
             name: 'DCM4CHEE',
-            wadoUriRoot: 'http://192.168.1.114:3001/dcm4chee-arc/aets/DCM4CHEE/wado',
-            qidoRoot: 'http://192.168.1.114:3001/dcm4chee-arc/aets/DCM4CHEE/rs',
-            wadoRoot: 'http://192.168.1.114:3001/dcm4chee-arc/aets/DCM4CHEE/rs',
+            wadoUriRoot: 'http://192.168.1.118:3001/dcm4chee-arc/aets/DCM4CHEE/wado',
+            qidoRoot: 'http://192.168.1.118:3001/dcm4chee-arc/aets/DCM4CHEE/dimse/HOROS',
+            wadoRoot: 'http://192.168.1.118:3001/dcm4chee-arc/aets/DCM4CHEE/dimse/HOROS',
             qidoSupportsIncludeField: true,
             imageRendering: 'wadors',
-            thumbnailRendering: 'wadors',            
-            // enableStudyLazyLoad: true,
-            // studyInstanceUIDs: this.props.studyID,
+            thumbnailRendering: 'wadors',
           }
         ]
-      } 
-    }; 
+      },
+    };   
   
   this.ohifViewerConfig = window.config; // or set it here
   this.containerId = 'ohif';
@@ -40,14 +36,46 @@ class App extends Component {
   };
 
   componentDidMount() {
+    
+    
     installViewer(
         this.ohifViewerConfig,
         this.containerId,
         this.componentRenderedOrUpdatedCallback
       );
-      document.getElementsByClassName("cornerstone-canvas").length > 0 ? document.getElementsByClassName("cornerstone-canvas")[0].height = 1200 : null
-  }
+      
+      setTimeout(() => {
+        const viewerContainer = document.getElementById(this.containerId);
+        if (viewerContainer) {
+          viewerContainer.style.height = '100vh';
+          viewerContainer.style.width = '100%';
+        }
 
+        if (window.matchMedia("(max-width: 768px)").matches) {
+          document.body.classList.add("ohif-mobile-mode");
+          window.dispatchEvent(new Event("resize"));
+        }
+        
+        if (window.innerWidth <= 768) {
+          document.body.classList.add("ohif-mobile-mode");
+          window.dispatchEvent(new Event("resize"));
+        }
+        
+        if(document.getElementsByClassName("roundedButtonWrapper noselect active").length){
+          document.getElementsByClassName("roundedButtonWrapper noselect active")[0].click();
+          window.dispatchEvent(new Event("resize"));
+        }
+
+        if(document.getElementsByClassName("toolbar-button").length){
+          document.getElementsByClassName("toolbar-button")[0].click();
+          window.dispatchEvent(new Event("resize"));
+        }
+        
+        console.log("this", window)
+        window.dispatchEvent(new Event('resize'));
+      }, 1000);
+  }
+  
   render () { 
     return(
       <div id={this.containerId}/>
